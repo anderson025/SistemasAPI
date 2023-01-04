@@ -1,27 +1,30 @@
-﻿@{
+﻿@model ContactModel
+@{
     ViewData["Title"] = "Novo Contato";
 }
 <div class="text-center">
     <h1 class="display-4">Novo Contato</h1>
 
 </div>
-<form>
+<form asp-controller="Contact" asp-action="Create" method="post"> 
+
     <div class="form-group mb-3">
         <label for="new-contact-name">Nome</label>
-        <input type="text" class="form-control" id="new-contact-name" placeholder="Nome completo">
+        <input type="text" asp-for="Name" class="form-control" id="new-contact-name" placeholder="Nome completo">
     </div>
     <div class="form-group mb-3">
         <label for="new-contact-email">E-mail</label>
-        <input type="email" class="form-control" id="new-contact-email" aria-describedby="emailHelp" placeholder="Email">
+        <input type="email" asp-for="Email" class="form-control" id="new-contact-email" aria-describedby="emailHelp" placeholder="Email">
         <small id="emailHelp" class="form-text text-muted">Não compartilhamos seu e-mail com ninguém.</small>
     </div>
     <div class="form-group mb-3">
         <label for="new-contact-phone">Telefone</label>
-        <input type="text" class="form-control" id="new-contact-phone" placeholder="(00) 00000-0000">
+        <input type="text" asp-for="Phone" class="form-control" id="new-contact-phone" placeholder="(00) 00000-0000">
     </div>
     <div class="d-flex justify-content-end">
         <a role="button" class="btn btn-secondary mx-1" asp-controller="Contact" asp-action="Index">Voltar</a>
-        <a role="button" class="btn btn-primary mx-1" asp-controller="Contact" asp-action="Index">Enviar</a>
+        
+        <button type="submit" class="btn btn-primary mx-1">Adicionar</button>
     </div>
 
 
