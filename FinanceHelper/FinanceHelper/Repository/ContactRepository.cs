@@ -10,11 +10,18 @@ namespace FinanceHelper.Repository {
 
 			_dataBaseContext = dataBaseContext;
 		}
+
+
+		public List<ContactModel> SelectAll() {
+
+			return _dataBaseContext.Contacts.ToList();
+		}
 		public ContactModel Create(ContactModel contact) {
 
 			_dataBaseContext.Contacts.Add(contact);
 			_dataBaseContext.SaveChanges();
 			return contact;
 		}
+		
 	}
 }

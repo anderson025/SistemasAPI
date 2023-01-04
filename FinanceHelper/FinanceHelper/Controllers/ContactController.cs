@@ -11,7 +11,8 @@ namespace FinanceHelper.Controllers {
 			_contactRepository = contactRepository;
 		}
 		public IActionResult Index() {
-			return View();
+			List<ContactModel> contacts = _contactRepository.SelectAll();
+			return View(contacts);
 		}
 		public IActionResult Create() {
 			return View();
