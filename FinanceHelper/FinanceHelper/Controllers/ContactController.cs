@@ -34,8 +34,22 @@ namespace FinanceHelper.Controllers {
 		[HttpPost]
 		public IActionResult Create(ContactModel contactModel) {
 
-			_contactRepository.Create(contactModel);
-			return RedirectToAction("Index");
+			try {
+
+				if (ModelState.IsValid) {
+
+					_contactRepository.Create(contactModel);
+					TempData["SucessMessage"] = "Contato cadastrado com sucesso.";
+					return RedirectToAction("Index");
+				}
+
+				return View(contactModel);
+			}
+			catch (Exception erro) {
+
+				TempData["ErrorMessage"] = $"Erro ao cadastrar contato:{erro}";
+				return RedirectToAction("Index");
+			}
 		}
 
 		[HttpPost]
