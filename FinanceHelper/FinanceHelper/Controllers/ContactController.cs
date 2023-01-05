@@ -17,17 +17,31 @@ namespace FinanceHelper.Controllers {
 		public IActionResult Create() {
 			return View();
 		}
-		public IActionResult Update() {
-			return View();
+		public IActionResult Update(int id) {
+			ContactModel contact = _contactRepository.GetById(id);
+			return View(contact);
 		}
-		public IActionResult ConfirmDelete() {
-			return View();
+		public IActionResult ConfirmDelete(int id) {
+			ContactModel contact = _contactRepository.GetById(id);
+			return View(contact);
 		}
+
+		public IActionResult Delete(int id) {
+			_contactRepository.Delete(id);
+			return RedirectToAction("Index");
+        }
 
 		[HttpPost]
 		public IActionResult Create(ContactModel contactModel) {
 
 			_contactRepository.Create(contactModel);
+			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		public IActionResult Update(ContactModel contactModel) {
+
+			_contactRepository.Update(contactModel);
 			return RedirectToAction("Index");
 		}
 	}
