@@ -18,8 +18,10 @@ namespace FinanceHelper.Controllers {
 			return View();
 		}
 		public IActionResult Update(int id) {
+
 			ContactModel contact = _contactRepository.GetById(id);
 			return View(contact);
+
 		}
 		public IActionResult ConfirmDelete(int id) {
 			ContactModel contact = _contactRepository.GetById(id);
@@ -27,9 +29,28 @@ namespace FinanceHelper.Controllers {
 		}
 
 		public IActionResult Delete(int id) {
-			_contactRepository.Delete(id);
-			return RedirectToAction("Index");
-        }
+
+			try {
+
+				bool deleted = _contactRepository.Delete(id);
+				if (deleted) {
+
+					TempData["SuccessMessage"] = "Contato Deletado com sucesso.";
+				}
+				else {
+					TempData["ErrorMessage"] = "Erro ao Deletar o contato.";
+				}
+
+				return RedirectToAction("Index");
+
+			}
+			catch (Exception error) {
+
+				TempData["ErrorMessage"] = $"Erro ao Deletar o contato:{error}";
+				return RedirectToAction("Index");
+			}
+
+		}
 
 		[HttpPost]
 		public IActionResult Create(ContactModel contactModel) {
@@ -39,15 +60,15 @@ namespace FinanceHelper.Controllers {
 				if (ModelState.IsValid) {
 
 					_contactRepository.Create(contactModel);
-					TempData["SucessMessage"] = "Contato cadastrado com sucesso.";
+					TempData["SuccessMessage"] = "Contato cadastrado com sucesso.";
 					return RedirectToAction("Index");
 				}
 
 				return View(contactModel);
 			}
-			catch (Exception erro) {
+			catch (Exception error) {
 
-				TempData["ErrorMessage"] = $"Erro ao cadastrar contato:{erro}";
+				TempData["ErrorMessage"] = $"Erro ao cadastrar contato:{error}";
 				return RedirectToAction("Index");
 			}
 		}
@@ -55,8 +76,22 @@ namespace FinanceHelper.Controllers {
 		[HttpPost]
 		public IActionResult Update(ContactModel contactModel) {
 
-			_contactRepository.Update(contactModel);
-			return RedirectToAction("Index");
+			try {
+				if (ModelState.IsValid) {
+					_contactRepository.Update(contactModel);
+					TempData["SuccessMessage"] = "Contato Atualizado com sucesso.";
+					return RedirectToAction("Index");
+				}
+
+				return View(contactModel);
+			}
+			catch (Exception error) {
+
+				TempData["ErrorMessage"] = $"Erro ao Atualizar o contato:{error}";
+				return RedirectToAction("Index");
+			}
+
+
 		}
 	}
 }
