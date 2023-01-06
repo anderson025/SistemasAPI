@@ -1,11 +1,11 @@
-﻿@model List<ContactModel>
+﻿@model List<UserModel>
 
 @{
-	ViewData["Title"] = "Listagem de Contatos";
+	ViewData["Title"] = "Listagem de Usuário";
 }
 <div class="text-center">
 	<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-		<a class="btn btn-secondary border" role="button" asp-controller="Contact" asp-action="Create">Novo Contato</a>
+		<a class="btn btn-secondary border" role="button" asp-controller="User" asp-action="Create">Novo Usuário</a>
 	</div>
 	<br />
 
@@ -26,38 +26,41 @@
 	}
 
 	<br />
-	<h1 class="display-4">Listagem de Contatos</h1>
+	<h1 class="display-4">Listagem de Usuários</h1>
 	<br />
 
-	<table class="table" id="table-contacts">
+	<table class="table" id="table-users">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">Nome</th>
-				<th scope="col">E-mail</th>
-				<th scope="col">Celular</th>
-				<td></td>
+				<th scope="col">Login</th>
+				<th scope="col">E-Mail</th>
+				<th scope="col">Data Cadastro</th>
+				<th scope="col"></th>				
 			</tr>
 		</thead>
 		<tbody>
 
 			@if (@Model != null && Model.Any()) {
 
-				foreach (ContactModel contato in Model) {
+				foreach (var user in Model) {
 					<tr>
-						<th scope="row">@contato.Id</th>
-						<td>@contato.Name</td>
-						<td>@contato.Email</td>
-						<td>@contato.Phone</td>
+						<th scope="row">@user.Id</th>
+						<td>@user.Name</td>
+						<td>@user.Login</td>
+						<td>@user.Email</td>
+						<td>@user.RegistrationDate</td>
 						<td>
 							<div class="btn-group" role="group" aria-label="Basic example">
-								<a role="button" class="btn btn-sm btn-light border" asp-route-id="@contato.Id" asp-controller="Contact" asp-action="Update">Editar</a>
-								<a role="button" class="btn btn-sm btn-danger border" asp-route-id="@contato.Id" asp-controller="Contact" asp-action="ConfirmDelete">Apagar</a>
+								<a role="button" class="btn btn-sm btn-light border" asp-route-id="@user.Id" asp-controller="User" asp-action="Update">Editar</a>
+								<a role="button" class="btn btn-sm btn-danger border" asp-route-id="@user.Id" asp-controller="User" asp-action="ConfirmDelete">Apagar</a>
 							</div>
 						</td>
 					</tr>
 				}
 			}
+			
 		</tbody>
 	</table>
 </div>

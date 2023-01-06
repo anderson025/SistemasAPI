@@ -11,6 +11,7 @@ builder.Services.AddDbContext<DataBaseContext>(options => {
 
 //Repository
 builder.Services.AddScoped<IContactRepository,ContactRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

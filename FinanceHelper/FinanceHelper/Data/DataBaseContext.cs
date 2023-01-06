@@ -9,5 +9,6 @@ namespace FinanceHelper.Data {
 		}
 
 		public DbSet<ContactModel> Contacts { get; set; }
+		public DbSet<UserModel> Users { get; set; }
 	}
 }

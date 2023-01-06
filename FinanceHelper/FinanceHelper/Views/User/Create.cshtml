@@ -1,0 +1,51 @@
+﻿@using FinanceHelper.Enums
+@model UserModel
+@{
+    ViewData["Title"] = "Novo Usuário";
+}
+<div class="text-center">
+    <h1 class="display-4">Novo Usuário</h1>
+
+</div>
+
+
+<form asp-controller="User" asp-action="Create" method="post"> 
+
+    <div class="form-group mb-3">
+        <label for="new-contact-name">Nome</label>
+        <input type="text" asp-for="Name" class="form-control" id="new-user-name" placeholder="Nome completo">
+        @Html.ValidationMessageFor(x => x.Name)
+    </div>
+    <div class="form-group mb-3">
+        <label for="new-contact-email">E-mail</label>
+        <input type="email" asp-for="Email" class="form-control" id="new-user-email" aria-describedby="emailHelp" placeholder="Email">
+        @Html.ValidationMessageFor(x => x.Email)
+    </div>
+    <div class="form-group mb-3">
+        <label for="new-contact-phone">Login</label>
+        <input type="text" asp-for="Login" class="form-control" id="new-user-login" placeholder="Login">
+        @Html.ValidationMessageFor(x => x.Login)
+    </div>
+    <div class="form-group mb-3">
+        <label for="new-contact-phone">Senha</label>
+        <input type="password" asp-for="Password" class="form-control" id="new-user-password">
+        @Html.ValidationMessageFor(x => x.Password)
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="new-user-perfil">Perfil</label>
+        <input type="text" asp-for="Profile" class="form-control" id="new-user-profile">
+        <select asp-for="Profile">
+            <option value="0">Selecione</option>
+            <option value="@ProfileEnum.Admin">Administrador</option>
+            <option value="@ProfileEnum.Padrao">Padrão</option>
+        </select>
+    </div>
+    <div class="d-flex justify-content-end">
+        <a role="button" class="btn btn-secondary mx-1" asp-controller="Contact" asp-action="Index">Voltar</a>
+        
+        <button type="submit" class="btn btn-primary mx-1">Adicionar</button>
+    </div>
+
+
+</form>
