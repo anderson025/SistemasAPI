@@ -1,16 +1,14 @@
 ﻿@using FinanceHelper.Enums
 @model UserModel
 @{
-    ViewData["Title"] = "Novo Usuário";
+    ViewData["Title"] = "Editar Usuário";
 }
 <div class="text-center">
-    <h1 class="display-4">Novo Usuário</h1>
+    <h1 class="display-4">Editar Usuário</h1>
 
 </div>
-
-
-<form asp-controller="User" asp-action="Create" method="post"> 
-
+<form asp-controller="User" asp-action="Update" method="post"> 
+    <input type="hidden" asp-for="Id" />
     <div class="form-group mb-3">
         <label for="new-contact-name">Nome</label>
         <input type="text" asp-for="Name" class="form-control" id="new-user-name" placeholder="Nome completo">
@@ -27,12 +25,6 @@
         @Html.ValidationMessageFor(x => x.Login)
     </div>
     <div class="form-group mb-3">
-        <label for="new-contact-phone">Senha</label>
-        <input type="password" asp-for="Password" class="form-control" id="new-user-password" placeholder="Digite sua senha.">
-        @Html.ValidationMessageFor(x => x.Password)
-    </div>
-
-    <div class="form-group mb-3">
         <label for="new-user-perfil">Perfil</label>
         
         <select asp-for="Profile" class="form-control">
@@ -45,7 +37,7 @@
     <div class="d-flex justify-content-end">
         <a role="button" class="btn btn-secondary mx-1" asp-controller="User" asp-action="Index">Voltar</a>
         
-        <button type="submit" class="btn btn-primary mx-1">Adicionar</button>
+        <button type="submit" class="btn btn-primary mx-1">Alterar</button>
     </div>
 
 

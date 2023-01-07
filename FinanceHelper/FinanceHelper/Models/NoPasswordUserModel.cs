@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace FinanceHelper.Models {
-	public class UserModel {
+	public class NoPasswordUserModel {
 
 		public int Id { get; set; }
 
@@ -19,16 +19,5 @@ namespace FinanceHelper.Models {
 		[Required(ErrorMessage = "Selecione o perfil do usuário.")]
 		public ProfileEnum? Profile { get; set; }
 
-		[Required(ErrorMessage = "Digite a senha do usuário.")]
-
-		public string Password { get; set; }
-
-		public DateTime RegistrationDate { get; set; }
-
-		public DateTime? UpdateDate { get; set; }
-
-		public Boolean PasswordIsValid(string password) {
-			return Password == password;
-		}
 	}
 }

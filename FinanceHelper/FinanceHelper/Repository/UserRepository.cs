@@ -11,6 +11,10 @@ namespace FinanceHelper.Repository {
 			_dataBaseContext = dataBaseContext;
 		}
 
+		public UserModel GetUserByLogin(string login) {
+			return _dataBaseContext.Users.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
+		}
+
 		public UserModel GetById(int id) {
 			return _dataBaseContext.Users.FirstOrDefault(user => user.Id == id);
 		}
