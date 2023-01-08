@@ -30,7 +30,10 @@ namespace FinanceHelper.Controllers {
 						TempData["ErrorMessage"] = "Senha do usuário é inválida. Por favor, tente novamente!";
 
 					}
-					TempData["ErrorMessage"] = "Usuário ou senha inválido(s). Por favor, tente novamente!";
+					else {
+						TempData["ErrorMessage"] = "Usuário ou senha inválido(s). Por favor, tente novamente!";
+					}
+					
 
 				}
 				return View("Index");
