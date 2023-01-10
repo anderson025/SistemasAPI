@@ -1,4 +1,5 @@
 using FinanceHelper.Data;
+using FinanceHelper.Helper;
 using FinanceHelper.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,8 +11,17 @@ builder.Services.AddDbContext<DataBaseContext>(options => {
 });
 
 //Repository
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddScoped<IContactRepository,ContactRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserSession, UserSession>();
+
+builder.Services.AddSession(o => {
+	o.Cookie.HttpOnly = true;
+	o.Cookie.IsEssential = true;
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -31,6 +41,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
 	name: "default",
