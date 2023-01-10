@@ -26,6 +26,7 @@ namespace FinanceHelper.Repository {
 		public UserModel Create(UserModel user) {
 
 			user.RegistrationDate = DateTime.Now;
+			user.SetPasswordHash();
 			_dataBaseContext.Users.Add(user);
 			_dataBaseContext.SaveChanges();
 			return user;

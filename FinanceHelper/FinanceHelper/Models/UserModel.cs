@@ -1,4 +1,5 @@
 ﻿using FinanceHelper.Enums;
+using FinanceHelper.Helper;
 using System.ComponentModel.DataAnnotations;
 
 namespace FinanceHelper.Models {
@@ -28,7 +29,11 @@ namespace FinanceHelper.Models {
 		public DateTime? UpdateDate { get; set; }
 
 		public Boolean PasswordIsValid(string password) {
-			return Password == password;
+			return Password == password.GenerateHash();
+		}
+
+		public void SetPasswordHash() {
+			Password = Password.GenerateHash();
 		}
 	}
 }
