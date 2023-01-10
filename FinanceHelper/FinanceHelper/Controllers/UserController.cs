@@ -1,8 +1,11 @@
-﻿using FinanceHelper.Models;
+﻿using FinanceHelper.Filters;
+using FinanceHelper.Models;
 using FinanceHelper.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceHelper.Controllers {
+
+	[AdminOnlyRestrictPage]
 	public class UserController : Controller {
 
 		private readonly IUserRepository _userRepository;

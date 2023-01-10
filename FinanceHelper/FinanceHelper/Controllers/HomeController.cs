@@ -1,8 +1,11 @@
-﻿using FinanceHelper.Models;
+﻿using FinanceHelper.Filters;
+using FinanceHelper.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace FinanceHelper.Controllers {
+
+	[LoggedUserPage]
 	public class HomeController : Controller {
 
 		public IActionResult Index() {
