@@ -15,6 +15,10 @@ namespace FinanceHelper.Repository {
 			return _dataBaseContext.Users.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
 		}
 
+		public UserModel GetUserByEmailAndLogin(string email, string login) {
+			return _dataBaseContext.Users.FirstOrDefault(x => x.Email.ToUpper() == email.ToUpper() && x.Login.ToUpper() == login.ToUpper());
+		}
+
 		public UserModel GetById(int id) {
 			return _dataBaseContext.Users.FirstOrDefault(user => user.Id == id);
 		}
@@ -60,5 +64,7 @@ namespace FinanceHelper.Repository {
 
 			return true;
 		}
-    }
+
+
+	}
 }

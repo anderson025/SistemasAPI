@@ -22,6 +22,10 @@ namespace FinanceHelper.Controllers {
 			return View();
 		}
 
+		public IActionResult RedefinePassword() {
+			return View();
+		}
+
 		public IActionResult CloseSession() {
 
 			_userSession.RemoveSessionUser();
@@ -56,6 +60,32 @@ namespace FinanceHelper.Controllers {
 			catch (Exception error) {
 
 				TempData["ErrorMessage"] = $"Ops! Não foi possível realizar o seu login. {error}";
+				return RedirectToAction("Index");
+			}
+		}
+
+		[HttpPost]
+		public IActionResult SendLinkForPasswordRedefinition(RedefinePasswordModel redefinePasswordModel) {
+			try {
+				if (ModelState.IsValid) {
+
+					UserModel user = _userRespository.GetUserByEmailAndLogin(redefinePasswordModel.Email, redefinePasswordModel.Login);
+
+					if (user is not null) {
+						string newPassword = user.GenerateNewPassword();
+
+						TempData["SuccessMessage"] = $"Enviamos uma nova senha para seu e-mail cadastrado!";
+						return RedirectToAction("Index", "Login");
+					}
+					else {
+						TempData["ErrorMessage"] = "Não conseguimos redefinir sua senha. Por favor, verifique os dados informados!";
+					}
+				}
+				return View("Index");
+			}
+			catch (Exception error) {
+
+				TempData["ErrorMessage"] = $"Ops! Não foi possível redefinir sua senha. {error}";
 				return RedirectToAction("Index");
 			}
 		}
