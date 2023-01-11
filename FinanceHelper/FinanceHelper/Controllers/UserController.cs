@@ -81,7 +81,7 @@ namespace FinanceHelper.Controllers {
 					user = new UserModel() {
 						Id = noPasswordUserModel.Id,
 						Name = noPasswordUserModel.Name,
-						Login = noPasswordUserModel.Email,
+						Login = noPasswordUserModel.Login,
 						Email = noPasswordUserModel.Email,
 						Profile = noPasswordUserModel.Profile
 					};
