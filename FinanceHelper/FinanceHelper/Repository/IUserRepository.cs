@@ -9,6 +9,7 @@ namespace FinanceHelper.Repository {
 		List<UserModel> SelectAll();
 		UserModel Create(UserModel user);
 		UserModel Update(UserModel user);
+		UserModel UpdatePassword(ChangePasswordModel changePasswordModel);
 		bool Delete(int id);
 	}
 }

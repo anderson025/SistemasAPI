@@ -36,6 +36,11 @@ namespace FinanceHelper.Models {
 			Password = Password.GenerateHash();
 		}
 
+		public void SetNewPassword(string newPassword) {
+
+			Password = newPassword.GenerateHash();
+		}
+
 		public string GenerateNewPassword() {
 			string newPassword = Guid.NewGuid().ToString().Substring(0, 8);
 			Password = newPassword.GenerateHash();
