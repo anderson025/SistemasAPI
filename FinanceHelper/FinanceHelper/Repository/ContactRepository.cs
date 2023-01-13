@@ -17,7 +17,7 @@ namespace FinanceHelper.Repository {
 
 		public List<ContactModel> SelectAll(int userId) {
 
-			return _dataBaseContext.Contacts.Where(user => user.Id == userId).ToList();
+			return _dataBaseContext.Contacts.Where(user => user.UserId == userId).ToList();
 		}
 		public ContactModel Create(ContactModel contact) {
 

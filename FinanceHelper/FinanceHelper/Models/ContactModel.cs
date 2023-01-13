@@ -18,6 +18,6 @@ namespace FinanceHelper.Models {
 
 		public int? UserId { get; set; }
 
-		public UserModel User { get; set; }
+		public UserModel? User { get; set; }
 	}
 }

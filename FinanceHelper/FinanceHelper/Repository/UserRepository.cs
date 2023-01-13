@@ -45,7 +45,8 @@ namespace FinanceHelper.Repository {
 			contactDB.Email = user.Email;
 			contactDB.Login = user.Login;
 			contactDB.UpdateDate = DateTime.Now;
-			contactDB.Profile = user.Profile;
+			contactDB.Profile = user.Profile;			
+
 
 			_dataBaseContext.Users.Update(contactDB);
 			_dataBaseContext.SaveChanges();
