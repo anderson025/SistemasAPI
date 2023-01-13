@@ -15,5 +15,9 @@ namespace FinanceHelper.Models {
 		[Required(ErrorMessage = "Digite o Telefone do contato.")]
 		[Phone(ErrorMessage ="O telefone informado é inválido.")]
 		public string Phone { get; set; }
+
+		public int? UserId { get; set; }
+
+		public UserModel User { get; set; }
 	}
 }

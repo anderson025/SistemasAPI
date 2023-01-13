@@ -1,4 +1,5 @@
-﻿using FinanceHelper.Models;
+﻿using FinanceHelper.Data.Map;
+using FinanceHelper.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceHelper.Data {
@@ -10,5 +11,10 @@ namespace FinanceHelper.Data {
 
 		public DbSet<ContactModel> Contacts { get; set; }
 		public DbSet<UserModel> Users { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder) {
+			modelBuilder.ApplyConfiguration(new ContactMap());
+			base.OnModelCreating(modelBuilder);
+		}
 	}
 }

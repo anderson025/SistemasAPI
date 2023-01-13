@@ -1,4 +1,5 @@
 ﻿using FinanceHelper.Filters;
+using FinanceHelper.Helper;
 using FinanceHelper.Models;
 using FinanceHelper.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -9,12 +10,15 @@ namespace FinanceHelper.Controllers {
 	public class ContactController : Controller {
 
 		private readonly IContactRepository _contactRepository;
+		private readonly IUserSession _userSession;
 
-		public ContactController(IContactRepository contactRepository) {
+		public ContactController(IContactRepository contactRepository, IUserSession userSession) {
 			_contactRepository = contactRepository;
+			_userSession = userSession;
 		}
 		public IActionResult Index() {
-			List<ContactModel> contacts = _contactRepository.SelectAll();
+			UserModel loggedUser = _userSession.GetSessionUser();
+			List<ContactModel> contacts = _contactRepository.SelectAll(loggedUser.Id);
 			return View(contacts);
 		}
 		public IActionResult Create() {
@@ -61,7 +65,8 @@ namespace FinanceHelper.Controllers {
 			try {
 
 				if (ModelState.IsValid) {
-
+					UserModel loggedUser = _userSession.GetSessionUser();
+					contactModel.UserId = loggedUser.Id;
 					_contactRepository.Create(contactModel);
 					TempData["SuccessMessage"] = "Contato cadastrado com sucesso.";
 					return RedirectToAction("Index");
@@ -81,6 +86,8 @@ namespace FinanceHelper.Controllers {
 
 			try {
 				if (ModelState.IsValid) {
+					UserModel loggedUser = _userSession.GetSessionUser();
+					contactModel.UserId = loggedUser.Id;
 					_contactRepository.Update(contactModel);
 					TempData["SuccessMessage"] = "Contato Atualizado com sucesso.";
 					return RedirectToAction("Index");
