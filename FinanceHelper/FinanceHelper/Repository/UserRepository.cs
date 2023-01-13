@@ -36,7 +36,7 @@ namespace FinanceHelper.Repository {
 			return user;
 		}
 
-        public UserModel Update(UserModel user) {
+		public UserModel Update(UserModel user) {
 			UserModel contactDB = GetById(user.Id);
 
 			if (contactDB == null)
@@ -51,7 +51,7 @@ namespace FinanceHelper.Repository {
 			_dataBaseContext.SaveChanges();
 
 			return contactDB;
-        }
+		}
 
 		public bool Delete(int id) {
 			UserModel contactDB = GetById(id);
@@ -65,6 +65,23 @@ namespace FinanceHelper.Repository {
 			return true;
 		}
 
+		public UserModel UpdatePassword(ChangePasswordModel changePasswordModel) {
+			UserModel contactDB = GetById(changePasswordModel.Id);
 
+			if (contactDB == null) throw new Exception("Houve um erro na Atualização da senha.");
+
+			if (!contactDB.PasswordIsValid(changePasswordModel.CurrentPassword)) throw new Exception("Senha Atual não confere!");
+
+			if (contactDB.PasswordIsValid(changePasswordModel.NewPassword)) throw new Exception("Nova senha deve ser diferente da senha Atual!");
+
+			contactDB.SetNewPassword(changePasswordModel.NewPassword);
+			contactDB.UpdateDate= DateTime.Now;
+
+			_dataBaseContext.Users.Update(contactDB);
+
+			_dataBaseContext.SaveChanges();
+
+			return contactDB;
+		}
 	}
 }
