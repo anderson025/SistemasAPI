@@ -28,7 +28,7 @@ namespace FinanceHelper.Models {
 
 		public DateTime? UpdateDate { get; set; }
 
-		public virtual List<ContactModel> Contacts { get; set; }
+		public virtual List<ContactModel>? Contacts { get; set; }
 
 		public Boolean PasswordIsValid(string password) {
 			return Password == password.GenerateHash();
