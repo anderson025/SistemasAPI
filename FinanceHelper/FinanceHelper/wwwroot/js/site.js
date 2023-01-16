@@ -8,6 +8,19 @@ $(document).ready(function () {
     getDataTable('#table-contacts');
     getDataTable('#table-users');
 
+    $('.btn-total-contatos').click(function () {
+        var userId = $(this).attr('user-id');
+
+        $.ajax({
+            type:'GET',
+            url: '/User/ListUsersContactById/' + userId,
+            success: function (result) {
+                $("#listUsersContacts").html(result);
+                $('#modelUserContacts').modal('show');
+            }
+        });        
+    });
+
 });
 
 function getDataTable(id){

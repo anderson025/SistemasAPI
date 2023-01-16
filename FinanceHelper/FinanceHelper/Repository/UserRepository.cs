@@ -1,5 +1,6 @@
 ﻿using FinanceHelper.Data;
 using FinanceHelper.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinanceHelper.Repository {
 	public class UserRepository : IUserRepository {
@@ -25,7 +26,9 @@ namespace FinanceHelper.Repository {
 
 		public List<UserModel> SelectAll() {
 
-			return _dataBaseContext.Users.ToList();
+			return _dataBaseContext.Users
+				.Include(x => x.Contacts)
+				.ToList();
 		}
 		public UserModel Create(UserModel user) {
 

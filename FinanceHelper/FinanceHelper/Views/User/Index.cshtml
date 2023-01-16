@@ -37,8 +37,9 @@
 				<th scope="col">Login</th>
 				<th scope="col">E-Mail</th>
 				<th scope="col">Perfil</th>
+				<th scope="col">Total</th>
 				<th scope="col">Data Cadastro</th>
-				<th scope="col"></th>				
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -52,6 +53,11 @@
 						<td>@user.Login</td>
 						<td>@user.Email</td>
 						<td>@(user.Profile == FinanceHelper.Enums.ProfileEnum.Admin ? "Administrador" : "Padrão")</td>
+						<td>
+							<a href="javascript:" user-id="@user.Id" class="btn btn-success btn-sm btn-total-contatos">
+								@(user.Contacts != null && user.Contacts.Any() ? user.Contacts.Count() : 0)
+							</a>
+						</td>
 						<td>@user.RegistrationDate</td>
 						<td>
 							<div class="btn-group" role="group" aria-label="Basic example">
@@ -62,7 +68,26 @@
 					</tr>
 				}
 			}
-			
+
 		</tbody>
 	</table>
+
+	<div id="modelUserContacts" class="modal" tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Listagem de contatos</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						@*<span aria-hidden="true">&times;</span>*@
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id="listUsersContacts">
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </div>

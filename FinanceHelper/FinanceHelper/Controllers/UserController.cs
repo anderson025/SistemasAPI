@@ -9,9 +9,11 @@ namespace FinanceHelper.Controllers {
 	public class UserController : Controller {
 
 		private readonly IUserRepository _userRepository;
+		private readonly IContactRepository _contactRepository;
 
-		public UserController(IUserRepository userRepository) {
+		public UserController(IUserRepository userRepository, IContactRepository contactRepository) {
 			_userRepository = userRepository;
+			_contactRepository = contactRepository;
 		}
 
 		public IActionResult Index() {
@@ -28,6 +30,12 @@ namespace FinanceHelper.Controllers {
 			UserModel user = _userRepository.GetById(id);
 			return View(user);
 
+		}
+
+		public IActionResult ListUsersContactById(int id) {
+
+			List<ContactModel> contacts = _contactRepository.SelectAll(id);
+			return PartialView("_UserContacts", contacts);
 		}
 
 		[HttpPost]
