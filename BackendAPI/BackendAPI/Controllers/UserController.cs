@@ -25,7 +25,7 @@ namespace BackendAPI.Controllers {
 		public async Task<ActionResult<UserModel>> GetById(int id) {
 
 			UserModel user = await _userRepository.GetById(id);
-			return Ok(User);
+			return Ok(user);
 		}
 
 		//// POST api/<UserController>
