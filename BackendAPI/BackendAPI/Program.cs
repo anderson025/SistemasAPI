@@ -1,3 +1,8 @@
+using BackendAPI.Data;
+using BackendAPI.Interfaces.Repository;
+using BackendAPI.Repository;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Connection DataBase
+ builder.Services.AddDbContext<FinanceAPIContext>(options => {
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"));
+});
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
